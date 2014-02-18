@@ -12,3 +12,15 @@
         </p>
     </div>
 </section>
+
+<button type="button" ng-click="greetAll()" class="btn btn-default">Default</button>
+<div class="list-group" ng-model="data">
+    <a href="#" class="list-group-item" ng:repeat="doc in data">{{doc}}</a>
+</div>
+
+
+
+
+@*<div class="alert alert-success">
+    <strong>Well done!</strong> {{text}}
+</div>*@

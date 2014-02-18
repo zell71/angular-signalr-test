@@ -1,21 +1,17 @@
 ﻿angular.module('main')
-    .controller('MainController', ['$scope', 'IssuuService', function ($scope, issuuService) {
-        var action = "issuu.documents.list";
-        var responseParams = "name,documentId,title,description";
-        
-        $scope.signature = issuuService.getMd5Hash(action, responseParams);
-        
-        issuuService.getDocumentArrayList(action, responseParams, $scope.signature, function (data) {
-            $scope.data = data.rsp._content.result._content;
-        });
+    .controller('MainController', ['$scope', 'signalRSvc', '$rootScope', function($scope, signalRSvc, $rootScope) {
 
+        $scope.text = "";
+        $scope.data = [];
 
-        console.log($scope.signature);
-        
-    }])
-    .directive("publication", function() {
-        return {
-            replace: true,
-            templateUrl: '../../Views/Temmplates/publication.html'            
-        };
-    });
+        $scope.greetAll = function() {
+            signalRSvc.sendRequest();
+        }
+
+        updateGreetingMessage = function(text) {
+            $scope.text = text;
+            $scope.data.push(text + " arraylength:"+ $scope.data.length);
+        }
+
+        signalRSvc.initialize(updateGreetingMessage);
+    }]);
