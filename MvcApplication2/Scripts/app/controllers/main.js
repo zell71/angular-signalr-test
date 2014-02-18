@@ -8,6 +8,10 @@
             signalRSvc.sendRequest();
         }
 
+        $scope.startTicker = function () {
+            signalRSvc.startTicker();
+        }
+
         updateGreetingMessage = function(text) {
             $scope.text = text;
             $scope.data.push(text + " arraylength:"+ $scope.data.length);

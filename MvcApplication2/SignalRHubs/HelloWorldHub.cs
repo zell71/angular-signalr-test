@@ -18,5 +18,10 @@ namespace MvcApplication2.SignalRHubs
         {
             _helloWorld.SendAcceptGreet();
         }
+
+        public void StartTicker()
+        {
+            _helloWorld.BeginTicker();
+        }
     }
 }
