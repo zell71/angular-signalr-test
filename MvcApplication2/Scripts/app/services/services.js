@@ -54,10 +54,14 @@ angularStartServices.factory('signalRSvc', function ($, $rootScope) {
                 });
             });
             
+            this.proxy.on('tickerStopped', function (message) {
+                $rootScope.$apply(function () {
+                    acceptGreetCallback(message);
+                });
+            });
+            
             //Starting connection
             connection.start();
-
-
         },
         sendRequest: function (callback) {
             //Invoking greetAll method defined in hub
@@ -65,6 +69,9 @@ angularStartServices.factory('signalRSvc', function ($, $rootScope) {
         },
         startTicker: function(callback) {
             this.proxy.invoke('startTicker');
+        },
+        stopTicker: function (callback) {
+            this.proxy.invoke('stopTicker');
         }
     }
 });

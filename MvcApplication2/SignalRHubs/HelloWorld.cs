@@ -14,6 +14,7 @@ namespace MvcApplication2.SignalRHubs
         private readonly TimeSpan _updateInterval = TimeSpan.FromMilliseconds(2500);
         private readonly Random _updateOrNotRandom = new Random();
         private Timer _timer;
+        private volatile TickerState _tickerState;
 
         private HelloWorld(IHubConnectionContext clients)
         {
@@ -34,19 +35,53 @@ namespace MvcApplication2.SignalRHubs
             set;
         }
 
-        public void SendAcceptGreet()
+        public TickerState TickerState
         {
-            Clients.All.acceptGreet("Good morning! The time is " + DateTime.Now.ToString("MM/dd/yy H:mm:ss"));
+            get { return _tickerState; }
+            private set { _tickerState = value; }
+        }
+
+        public void SendAcceptGreet(string message)
+        {
+            Clients.All.acceptGreet(message);
         }
 
         private void UpdateInterface(object state)
         {
-            Clients.All.acceptGreet("Good morning! The time is " + DateTime.Now.ToString("MM/dd/yy H:mm:ss"));
+            Clients.All.acceptGreet("Ticker Started " + DateTime.Now.ToString("MM/dd/yy H:mm:ss"));
+        }
+
+        private void StopMessage()
+        {
+            Clients.All.acceptGreet("Ticker Stopped " + DateTime.Now.ToString("MM/dd/yy H:mm:ss"));
         }
 
         public void BeginTicker()
         {
-            _timer = new Timer(UpdateInterface, null, _updateInterval, _updateInterval);
+            if (TickerState != TickerState.Open)
+            {
+                _timer = new Timer(UpdateInterface, null, _updateInterval, _updateInterval);
+                TickerState = TickerState.Open;
+            }            
         }
+
+        public void StopTicker()
+        {
+            if (TickerState == TickerState.Open)
+            {
+                if (_timer != null)
+                {
+                    _timer.Dispose();
+                }
+                TickerState = TickerState.Closed;
+                StopMessage();
+            }
+        }
+    }
+
+    public enum TickerState
+    {
+        Closed,
+        Open
     }
 }

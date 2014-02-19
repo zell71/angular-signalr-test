@@ -16,12 +16,17 @@ namespace MvcApplication2.SignalRHubs
 
         public void GreetAll()
         {
-            _helloWorld.SendAcceptGreet();
+            _helloWorld.SendAcceptGreet("Server Time is: " + DateTime.Now.ToString("MM/dd/yy H:mm:ss"));
         }
 
         public void StartTicker()
         {
             _helloWorld.BeginTicker();
+        }
+
+        public void StopTicker()
+        {
+            _helloWorld.StopTicker();
         }
     }
 }

@@ -278,6 +278,7 @@
     <Content Include="Scripts\lib\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\lib\md5.js" />
     <Content Include="Scripts\lib\modernizr-2.6.2.js" />
+    <Content Include="Scripts\lib\ui-bootstrap-tpls-0.10.0.js" />
     <Content Include="Scripts\lib\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
