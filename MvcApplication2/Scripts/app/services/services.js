@@ -12,22 +12,6 @@ angularStartServices.factory('TestService', [function () {
 
 angularStartServices.factory('IssuuService', ['$http', function ($http) {
     var service = {};
-    var apikey = "6k6y8je0z1ns6zcgrvbp8klm9dkzp86v";
-    
-    service.getMd5Hash = function (action, params) {
-        var secret = "ohswkldq7p9rxd5evkxorz5pw31siyeq";
-        return CryptoJS.MD5(secret + "accesspublicaction" + action + "apiKey" + apikey + "formatjsonresponseParams" + params);
-    };
-
-    service.getDocumentArrayList = function (action, params, signature, callback) {
-        var url = "http://api.issuu.com/1_0?action=" + action + "&apiKey=" + apikey + "&access=public&responseParams=" + encodeURIComponent(params) + "&format=json&signature=" + signature;
-        $http.get(url, { cache: true }).success(callback);
-    };
-    
-    service.getEmbedDocumentArrayList = function (action, params, signature, callback) {
-        var url = "http://api.issuu.com/1_0?action=" + action + "&apiKey=" + apikey + "&access=public&responseParams=" + encodeURIComponent(params) + "&format=json&signature=" + signature;
-        $http.get(url, { cache: true }).success(callback);
-    };
 
     return service;
 }]);
