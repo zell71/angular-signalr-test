@@ -35,7 +35,8 @@ namespace MvcApplication2
                 "~/Scripts/lib/md5.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/lib/bootstrap.js"));
+                "~/Scripts/lib/bootstrap.js",
+                "~/Scripts/lib/ui-bootstrap-tpls-0.10.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
                 "~/Scripts/lib/jquery.signalR-2.0.2.js"));

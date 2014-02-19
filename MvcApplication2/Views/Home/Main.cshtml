@@ -14,15 +14,24 @@
 </section>
 
 <button type="button" ng-click="greetAll()" class="btn btn-default">Manual</button>
-<button type="button" ng-click="startTicker()" class="btn btn-default">Auto</button>
-<div class="alert alert-success">
-    <strong>Well done!</strong> {{text}}
+<button type="button" ng-click="startTicker()" class="btn btn-default"><span class="glyphicon glyphicon-play"></span></button>
+<button type="button" ng-click="stopTicker()" class="btn btn-default"><span class="glyphicon glyphicon-stop"></span></button>
+<hr/>
+<div class="alert alert-success" ng-if="text">
+    <strong>Message:</strong> {{text}}
 </div>
-<div class="list-group" ng-model="data">
-    <a href="#" class="list-group-item" ng:repeat="doc in data">{{doc}}</a>
+
+<div class="row">
+
+        <div class="col-md-4" style="overflow: auto; max-height: 320px">
+            <div class="list-group" ng-model="data" >
+                <a href="#" class="list-group-item" ng:repeat="doc in data">{{doc}}</a>
+            </div>
+        </div>
+
+    <div class="col-md-6">
+        <progressbar class="progress-striped active" max="20" value="dynamic" type="{{type}}"><i>{{progresstext}}</i></progressbar>
+    </div>
 </div>
-
-
-
 
 
